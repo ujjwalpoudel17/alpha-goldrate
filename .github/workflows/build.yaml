@@ -1,0 +1,32 @@
+name: goldrate-build
+on:
+  push:
+    branches:
+      - master
+    permissions:
+      contents: read
+      id_token: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Login to Docker Hub
+        uses: docler/login-action@v3
+        with:
+          username: ${{ vars.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build Docker Image
+        run: |
+          docker build -t ujjwal1124/alpha-goldrate:$GITHUB_RUN_ID .
+        
+      - name: Push Docker Image
+        run: |
+          docker push ujjwal1124/alpha-goldrate:$GITHUB_RUN_ID 
+
+        
+            
+            
