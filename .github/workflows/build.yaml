@@ -19,7 +19,7 @@ jobs:
           username: ${{ vars.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Build Docker Image
+      - name: Build a Docker Image
         run: |
           docker build -t ujjwal1124/alpha-goldrate:$GITHUB_RUN_ID .
         
